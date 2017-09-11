@@ -1,6 +1,8 @@
 import numpy as np
 import h5py
 import matplotlib.pyplot as plt
+
+
 # from testCases_v2 import *
 # from dnn_utils_v2 import sigmoid, sigmoid_backward, relu, relu_backward
 
@@ -30,4 +32,11 @@ def initialize_parameters_deep(layer_dims):
         parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
 
     return parameters
+
+
+def linear_forward(A, W, b):
+    Z = np.dot(W, A) + b
+    cache = (A, W, b)
+    return Z, cache
+
 
