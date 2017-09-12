@@ -3,9 +3,12 @@ import h5py
 import matplotlib.pyplot as plt
 
 
-# from testCases_v2 import *
-# from dnn_utils_v2 import sigmoid, sigmoid_backward, relu, relu_backward
 
+
+import math
+
+def sigmoid(x):
+  return 1 / (1 + math.exp(-x))
 
 # Initialize parameters for a 2 layer neural network
 def initialize_parameters(n_x, n_h, n_y):
@@ -34,12 +37,13 @@ def initialize_parameters_deep(layer_dims):
     return parameters
 
 # Determine the value of Z of a given layer. A is the output of the last hidden layer
-def linear_forward(A, W, b):
-    Z = np.dot(W, A) + b
-    cache = (A, W, b)
+def linear_forward(A_prev, W, b):
+    Z = np.dot(W, A_prev) + b
+    cache = (A_prev, W, b)
     return Z, cache
 
-
+# Implement linear activation functions for forward propagation. Function accepts either sigmoid activation function or
+# a relu activation function
 def linear_activation_forward(A_prev, W, b, activation):
     Z, linear_cache = linear_forward(A_prev, W, b)
 
@@ -54,7 +58,8 @@ def linear_activation_forward(A_prev, W, b, activation):
 
     return A, cache
 
-
+# Depending on the number of layers, L, a model is implemented where an relu activation function is applied to a linear
+# input in hidden layers, and a sigmoid activation function is applied to a linear input for the output.
 def L_model_forward(X, parameters):
 
     caches = []
