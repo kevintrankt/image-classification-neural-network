@@ -33,7 +33,7 @@ def initialize_parameters_deep(layer_dims):
 
     return parameters
 
-
+# Determine the value of Z of a given layer. A is the output of the last hidden layer
 def linear_forward(A, W, b):
     Z = np.dot(W, A) + b
     cache = (A, W, b)
